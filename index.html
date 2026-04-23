@@ -43,6 +43,30 @@
             width: 35px;
             text-align: center;
         }
+        
+        /* Scroll suave para toda a página */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Compensação para navbar fixa - evita que o conteúdo fique atrás da barra */
+        /* Aplica a todas as seções e também aos títulos principais */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Para garantir que os títulos também tenham compensação */
+        section[id] h3,
+        section[id] .card.bg-primary {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Ajuste específico para telas menores */
+        @media (max-width: 768px) {
+            section[id] {
+                scroll-margin-top: 70px;
+            }
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -63,7 +87,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">GOU Camisetas</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -81,8 +105,8 @@
     <!-- Conteúdo Principal -->
     <main class="container my-4">
         <!-- Seção Como Fazer o Pedido -->
-        <section id="pedido" class="mb-4">
-            <h3 class="text-center mb-3 pb-2 border-bottom">Como Fazer o Pedido</h3>
+        <section id="pedido" class="mb-4 pb-3">
+            <h3 class="text-center mb-3 mt-2 pb-2 border-bottom">Como Fazer o Pedido</h3>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="card bg-primary text-white mb-3">
@@ -97,7 +121,7 @@
                             <div class="card h-100 text-center">
                                 <div class="card-body py-2">
                                     <div class="fs-1 fw-bold text-primary">1</div>
-                                    <h6 class="fw-bold mt-2 mb-1">Escolha da(s) camiseta(s)</h6>
+                                    <h6 class="fw-bold mt-2 mb-1">Escolha</h6>
                                     <p class="small text-muted mb-0">Tamanho e quantidade</p>
                                 </div>
                             </div>
@@ -125,7 +149,7 @@
                                 <div class="card-body py-2">
                                     <div class="fs-1 fw-bold text-primary">4</div>
                                     <h6 class="fw-bold mt-2 mb-1">Pague</h6>
-                                    <p class="small text-muted mb-0">Inteiro ou 50% entrada</p>
+                                    <p class="small text-muted mb-0">Inteiro ou 50% de entrada</p>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +157,7 @@
                             <div class="card h-100 text-center">
                                 <div class="card-body py-2">
                                     <div class="fs-1 fw-bold text-primary">5</div>
-                                    <h6 class="fw-bold mt-2 mb-1">Combine</h6>
-                                    <p class="small text-muted mb-0">Entrega por WhatsApp</p>
+                                    <h6 class="fw-bold mt-2 mb-1">Combinar entrega</h6>
                                 </div>
                             </div>
                         </div>
@@ -152,38 +175,40 @@
                     <!-- Versão Mobile: Lista estilo características - NÚMEROS SEM FUNDO -->
                     <div class="passo-mobile">
                         <div class="list-group list-group-flush border rounded">
-                            <div class="list-group-item d-flex align-items-center py-2">
-                                <span class="numero-passo me-2">1</span>
-                                <span><strong>Escolha</strong> - Modelo, tamanho e quantidade</span>
+                            <div class="list-group-item d-flex gap-2 py-2">
+                                <span class="text-primary fw-bold" style="min-width: 35px; text-align: center;">1</span>
+                                <span class="flex-grow-1"><strong>Escolha</strong> - Tamanho e quantidade</span>
                             </div>
-                            <div class="list-group-item d-flex align-items-center py-2">
-                                <span class="numero-passo me-2">2</span>
-                                <span><strong>Envie seus dados</strong> - Nome Completo, telefone e dados do seu pedido</span>
+                            <div class="list-group-item d-flex gap-2 py-2">
+                                <span class="text-primary fw-bold" style="min-width: 35px; text-align: center;">2</span>
+                                <span class="flex-grow-1"><strong>Envie</strong> - Nome Completo, telefone e sua escolha</span>
                             </div>
-                            <div class="list-group-item d-flex align-items-center py-2">
-                                <span class="numero-passo me-2">3</span>
-                                <span><strong>Aguardar</strong> - Resposta do vendedor</span>
+                            <div class="list-group-item d-flex gap-2 py-2">
+                                <span class="text-primary fw-bold" style="min-width: 35px; text-align: center;">3</span>
+                                <span class="flex-grow-1"><strong>Aguardar</strong> - Resposta do vendedor</span>
                             </div>
-                            <div class="list-group-item d-flex align-items-center py-2">
-                                <span class="numero-passo me-2">4</span>
-                                <span><strong>Pague</strong> - Inteiro ou 50% de entrada</span>
+                            <div class="list-group-item d-flex gap-2 py-2">
+                                <span class="text-primary fw-bold" style="min-width: 35px; text-align: center;">4</span>
+                                <span class="flex-grow-1"><strong>Pague</strong> - Inteiro ou 50% de entrada</span>
                             </div>
-                            <div class="list-group-item d-flex align-items-center py-2">
-                                <span class="numero-passo me-2">5</span>
-                                <span><strong>Combine</strong> - Entrega por WhatsApp</span>
+                            <div class="list-group-item d-flex gap-2 py-2">
+                                <span class="text-primary fw-bold" style="min-width: 35px; text-align: center;">5</span>
+                                <span class="flex-grow-1"><strong>Combinar entrega</strong></span>
                             </div>
-                            <div class="list-group-item d-flex align-items-center py-2 bg-success text-white">
-                                <span class="me-2">✅</span>
-                                <span><strong>Pronto!</strong> - Pedido realizado com sucesso</span>
+                            <div class="list-group-item d-flex gap-2 py-2 bg-success text-white">
+                                <span>✅</span>
+                                <span class="flex-grow-1"><strong>Pronto!</strong> - Pedido realizado com sucesso</span>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </section>
+        
         <!-- Seção Contato -->
-        <section id="contato" class="mb-4">
-            <h3 class="text-center mb-3 pb-2 border-bottom">Contato e Pagamento</h3>
+        <section id="contato" class="mb-4 pb-3">
+            <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Contato e Pagamento</h3>
             <div class="row g-3">
                 <div class="col-md-6">
                     <div class="card h-100">
@@ -220,7 +245,8 @@
                                         <i class="bi bi-copy"></i> Copiar
                                     </button>
                                 </div>
-                                <small class="text-muted">Chave: carloacutisgou@gmail.com</small>
+                                <small class="text-muted">Chave: carloacutisgou@gmail.com</small><br>
+                                <small class="text-muted">Titular: Tais Barbosa Rodrigues</small>
                             </div>
                             <div>
                                 <h6><i class="bi bi-cash"></i> Dinheiro</h6>
@@ -232,11 +258,9 @@
             </div>
         </section>
 
-        
-
         <!-- Seção modelo -->
-        <section id="modelo" class="mb-4">
-            <h3 class="text-center mb-3 pb-2 border-bottom">Modelo Único</h3>
+        <section id="modelo" class="mb-4 pb-3">
+            <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Modelo Único</h3>
             <div class="row g-3">
                 <div class="col-md-6">
                     <div class="card h-100">
@@ -260,8 +284,8 @@
         </section>
 
         <!-- Seção Sobre a Camiseta -->
-        <section id="sobre" class="mb-4">
-            <h3 class="text-center mb-3 pb-2 border-bottom">Sobre a Camiseta</h3>
+        <section id="sobre" class="mb-4 pb-3">
+            <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Sobre a Camiseta</h3>
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
                     <div class="card h-100">
@@ -290,8 +314,8 @@
                             <h6 class="card-title text-primary"><i class="bi bi-calendar-event"></i> Informações</h6>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2"><span><i class="bi bi-calendar-check"></i> Prazo:</span> <span> 12 de maio</span></li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2"><span><i class="bi bi-truck"></i> Entrega:</span><span> 30 dias úteis</span></li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2"><span><i class="bi bi-credit-card"></i> Pagamento:</span> <span> À vista ou em 2x</span></li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2"><span><i class="bi bi-truck"></i> Entrega(previsão):</span><span> 1 mês após prazo</span></li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2"><span><i class="bi bi-credit-card"></i> Pagamento:</span> <span> À vista ou 50% de entrada</span></li>
                             </ul>
                         </div>
                     </div>
@@ -304,20 +328,18 @@
 
         <!-- Seção Tamanhos com link para download -->
         <section id="tamanhos" class="mb-4">
-            <h3 class="text-center mb-3 pb-2 border-bottom">Tabela de Tamanhos</h3>
+            <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Tabela de Tamanhos</h3>
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body text-center">
                             <img src="assets/imgs/IMG-20260410-WA0018.jpg" class="img-fluid rounded mb-3" alt="Tabela de tamanhos">
                             
-                            <!-- ALERTA COM LINK PARA DOWNLOAD -->
                             <div class="alert alert-info mb-3 py-2">
                                 <i class="bi bi-info-circle-fill"></i> 
                                 <strong>Observação:</strong> As medidas podem variar até 1cm para mais ou para menos.
                             </div>
                             
-                            <!-- BOTÃO PARA BAIXAR A TABELA -->
                             <a href="assets/imgs/IMG-20260410-WA0018.jpg" download class="btn btn-outline-primary btn-download">
                                 <i class="bi bi-download"></i> Baixar Tabela de Tamanhos
                             </a>
@@ -334,7 +356,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-4 mb-2">
-                    <p class="small text-white mb-0">Ministério Universidades Renovadas - Renovação Carismática Católica Diocese de Campo Mourão</p>
+                    <p class="small text-white mb-0">GOU Carlo Acutis - Ministério Universidades Renovadas - Renovação Carismática Católica Diocese de Campo Mourão</p>
                 </div>
                 <div class="col-md-4 mb-2">
                     <h6 class="fw-bold">Informações</h6>
@@ -343,9 +365,9 @@
                 <div class="col-md-4 mb-2">
                     <h6 class="fw-bold">Compartilhe</h6>
                     <div class="d-flex justify-content-center gap-3">
-                        <a href="#" class="text-white"><i class="bi bi-whatsapp"></i></a>
-                        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                        <i class="text-white bi bi-whatsapp"></i>
+                        <i class="text-white bi bi-instagram"></i>
+                        <i class="text-white bi bi-facebook"></i>
                     </div>
                 </div>
             </div>
@@ -360,8 +382,8 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Script para copiar Pix -->
     <script>
+        // Função para copiar Pix
         function copyPix() {
             const emailInput = document.getElementById('pixEmail');
             emailInput.select();
@@ -379,6 +401,23 @@
                 btn.classList.add('btn-outline-primary');
             }, 2000);
         }
+        
+        // Fechar o menu hamburguer automaticamente ao clicar em um link
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
