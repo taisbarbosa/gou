@@ -48,25 +48,6 @@
         html {
             scroll-behavior: smooth;
         }
-        
-        /* Compensação para navbar fixa - evita que o conteúdo fique atrás da barra */
-        /* Aplica a todas as seções e também aos títulos principais */
-        section[id] {
-            scroll-margin-top: 80px;
-        }
-        
-        /* Para garantir que os títulos também tenham compensação */
-        section[id] h3,
-        section[id] .card.bg-primary {
-            scroll-margin-top: 80px;
-        }
-        
-        /* Ajuste específico para telas menores */
-        @media (max-width: 768px) {
-            section[id] {
-                scroll-margin-top: 70px;
-            }
-        }
     </style>
 </head>
 <body class="bg-light">
@@ -84,7 +65,7 @@
     </header>
 
     <!-- Navegação -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">GOU Camisetas</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menu">
@@ -105,8 +86,8 @@
     <!-- Conteúdo Principal -->
     <main class="container my-4">
         <!-- Seção Como Fazer o Pedido -->
-        <section id="pedido" class="mb-4 pb-3">
-            <h3 class="text-center mb-3 mt-2 pb-2 border-bottom">Como Fazer o Pedido</h3>
+        <section id="pedido" class="mb-4 pb-4">
+            <h3 class="text-center mb-3 mt-2 py-2 border-bottom">Como Fazer o Pedido</h3>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="card bg-primary text-white mb-3">
@@ -207,7 +188,7 @@
         </section>
         
         <!-- Seção Contato -->
-        <section id="contato" class="mb-4 pb-3">
+        <section id="contato" class="mb-4 pb-4">
             <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Contato e Pagamento</h3>
             <div class="row g-3">
                 <div class="col-md-6">
@@ -259,7 +240,7 @@
         </section>
 
         <!-- Seção modelo -->
-        <section id="modelo" class="mb-4 pb-3">
+        <section id="modelo" class="mb-4 pb-4">
             <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Modelo Único</h3>
             <div class="row g-3">
                 <div class="col-md-6">
@@ -284,7 +265,7 @@
         </section>
 
         <!-- Seção Sobre a Camiseta -->
-        <section id="sobre" class="mb-4 pb-3">
+        <section id="sobre" class="mb-4 pb-4">
             <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Sobre a Camiseta</h3>
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
@@ -327,7 +308,7 @@
         </section>
 
         <!-- Seção Tamanhos com link para download -->
-        <section id="tamanhos" class="mb-4">
+        <section id="tamanhos" class="mb-4 pb-4">
             <h3 class="text-center mb-3 mt-4 py-2 border-top border-bottom">Tabela de Tamanhos</h3>
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -365,9 +346,9 @@
                 <div class="col-md-4 mb-2">
                     <h6 class="fw-bold">Compartilhe</h6>
                     <div class="d-flex justify-content-center gap-3">
-                        <i class="text-white bi bi-whatsapp"></i>
-                        <i class="text-white bi bi-instagram"></i>
-                        <i class="text-white bi bi-facebook"></i>
+                        <a href="#" class="text-white"><i class="bi bi-whatsapp"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
                     </div>
                 </div>
             </div>
@@ -408,12 +389,34 @@
             const navbarCollapse = document.querySelector('.navbar-collapse');
             
             navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navbarCollapse.classList.contains('show')) {
-                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                            toggle: false
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Previne o comportamento padrão temporariamente
+                    
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // Fecha o menu hamburguer se estiver aberto
+                        if (navbarCollapse.classList.contains('show')) {
+                            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                                toggle: false
+                            });
+                            bsCollapse.hide();
+                        }
+                        
+                        // Calcula a altura da navbar
+                        const navbar = document.getElementById('mainNavbar');
+                        const navbarHeight = navbar.offsetHeight;
+                        
+                        // Calcula a posição correta para rolar
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 10;
+                        
+                        // Rola suavemente até a posição calculada
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
                         });
-                        bsCollapse.hide();
                     }
                 });
             });
